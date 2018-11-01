@@ -5,6 +5,11 @@ const logoStyle = {
     width: '200px',
 }
 
+const navLinkStyle = {
+    color: 'white',
+
+}
+
 const navStyle = {
     backgroundColor: '#0075B8',
 }
@@ -34,17 +39,6 @@ class App extends React.Component {
     render() {
         return (
             <div className="container-fluid" style={container}>
-                <Nav course={this.props.course}/>
-                <div className={"container"}>
-                    <div className={"row"}>
-                        <ProgressBar/>
-                    </div>
-                </div>
-                <div className={"row"}>
-                    <div className={"col-12"}>
-                        <HeaderMessage/>
-                    </div>
-                </div>
                 <div className={"row"}>
                     <div className={"col-2"}></div>
                     <div className={"col-8"}>
@@ -52,60 +46,40 @@ class App extends React.Component {
                     </div>
                     <div className={"col-2"}></div>
                 </div>
-                <Footer/>
             </div>
         )
     }
 }
 
 class Nav extends React.Component {
+    constructor() {
+        super();
+        this.state = {hover: false};
+
+    }
+
+    mouseOver() {
+        console.log("hover over");
+        this.setState({hover: true});
+
+    }
+
     render() {
-        return (<ul className={"nav navbar navbar-expand-lg"} style={navStyle}>
+        return (<nav className={"navbar"} style={navStyle}>
                 <a className={"navbar-brand"} href="#">
                     <img src="../img/Allstate-Emblem.jpg" style={logoStyle}></img>
                 </a>
-                <li className="nav-item">
-                    <a className="nav-link active" href="#">Active</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">Link</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">Link</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-        )
-    }
-}
+                <ul className={"nav justify-content-end"} style={navStyle}>
 
-class ProgressBar extends React.Component {
-    render() {
-        return (
-            <ul style={progressBarLi}>
-                <li className={"active"}>Step 1</li>
-                <li>Step 2</li>
-                <li>Step 3</li>
-            </ul>
-        )
-    }
-}
-
-class HeaderMessage extends React.Component {
-    render() {
-        return (
-            <div className="row">
-                <div className={"col-2"}></div>
-                <div className={"col-8"}>
-                    <hr></hr>
-                    <h1 className={headerTextStyle}>Card Details Entry Template</h1>
-                    <hr></hr>
-                </div>
-                <div className={"col-2"}></div>
-            </div>
-
+                    <li className={"nav-item"}>
+                        <a onMouseOver={this.mouseOver} style={navLinkStyle} className="nav-link active" href="#">|
+                            About Allstate |</a>
+                    </li>
+                    <li className={"nav-item"}>
+                        <a style={navLinkStyle} className="nav-link" href="#">| Find Us |</a>
+                    </li>
+                </ul>
+            </nav>
         )
     }
 }
@@ -118,6 +92,21 @@ class Form extends React.Component {
                     <form>
                         <div className={"row"}>
                             <div className={"col-sm-12 col-md-8"}>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputEmail1">Full Name</label>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp"
+                                           placeholder="As Appears on Card"></input>
+                                    <small id="emailHelp" className="form-text text-muted">Enter your full name as it
+                                        appears on the card.
+                                    </small>
+                                </div>
+                            </div>
+                            <div className={"col-4"}></div>
+                            <div className={"col-4"}></div>
+                        </div>
+                        <div className={"row"}>
+                            <div className={"col-sm-12 col-md-4"}>
                                 <div className="form-group">
                                     <label htmlFor="exampleFormControlSelect1">Card Type</label>
                                     <select className="form-control" id="exampleFormControlSelect1">
@@ -146,8 +135,17 @@ class Form extends React.Component {
                                     </small>
                                 </div>
                             </div>
-                            <div className={"col-sm-12 col-md-2"}></div>
-                            <div className={"col-sm-12 col-md-2"}></div>
+                            <div className={"col-sm-12 col-md-4"}>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputEmail1">CVV</label>
+                                    <input type="number" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp"
+                                           placeholder="Enter 3-digit CVV"></input>
+                                    <small id="emailHelp" className="form-text text-muted">We'll never share your card
+                                        details with anyone else.
+                                    </small>
+                                </div>
+                            </div>
                         </div>
                         <div className={"row"}>
                             <div className={"col-4"}>
@@ -175,36 +173,11 @@ class Form extends React.Component {
                             <div className={"col-4"}></div>
                         </div>
                         <div className={"row"}>
-                            <div className={"col-4"}>
-                                <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">Full Name</label>
-                                    <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp"
-                                           placeholder="Enter 16-digit card number"></input>
-                                    <small id="emailHelp" className="form-text text-muted">Enter your full name as it
-                                        appears on the card.
-                                    </small>
-                                </div>
-                            </div>
-                            <div className={"col-4"}>
-                                <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">CVV</label>
-                                    <input type="number" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp"
-                                           placeholder="Enter 16-digit card number"></input>
-                                    <small id="emailHelp" className="form-text text-muted">We'll never share your card
-                                        details with anyone else.
-                                    </small>
-                                </div>
-                            </div>
-                            <div className={"col-4"}></div>
-                        </div>
-                        <div className={"row"}>
-                            <div className={"col-4"}>
+                            <div className={"col-sm-12 col-md-3"}></div>
+                            <div className={"col-sm-12 col-md-6"}>
                                 <input type={"submit"} className={"btn btn-block btn-success"}></input>
                             </div>
-                            <div className={"col-4"}></div>
-                            <div className={"col-4"}></div>
+                            <div className={"col-sm-12 col-md-3"}></div>
                         </div>
                     </form>
                 </div>
@@ -213,57 +186,6 @@ class Form extends React.Component {
     }
 }
 
-class Footer extends React.Component {
-    render() {
-        const pAlign = {
-            textAlign: 'center',
-        }
-        return (
-            <footer className={"text-muted"}>
-                <div className={"container"}>
-                    <p style={pAlign}><i className="far fa-copyright"></i> 2018 Allstate Insurance Company. All rights
-                        reserved.</p>
-                    <h5 style={pAlign}>Connect With Us</h5>
-                    <hr></hr>
-                    <div className={"row"}>
-                        <div className={"col-3"}></div>
-                        <div className={"col-1"}>
-                            <a href={"https://www.facebook.com/Allstate/"} target="_blank">
-                                <i className="fab fa-facebook-square fa-2x"></i>
-                            </a>
-                        </div>
-                        <div className={"col-1"}>
-                            <a href={"https://www.instagram.com/Allstate/"} target="_blank">
-                                <i className="fab fa-instagram fa-2x"></i>
-                            </a>
-                        </div>
-                        <div className={"col-1"}>
-                            <a href={"https://www.linkedin.com/company/Allstate/"} target="_blank">
-                                <i className="fab fa-linkedin-in fa-2x"></i>
-                            </a>
-                        </div>
-                        <div className={"col-1"}>
-                            <a href={"https://www.pinterest.com/Allstate/"} target="_blank">
-                                <i className="fab fa-pinterest-square fa-2x"></i>
-                            </a>
-                        </div>
-                        <div className={"col-1"}>
-                            <a href={"https://www.twitter.com/Allstate/"} target="_blank">
-                                <i className="fab fa-twitter-square fa-2x"></i>
-                            </a>
-                        </div>
-                        <div className={"col-1"}>
-                            <a href={"https://www.youtube.com/Allstate/"} target="_blank">
-                                <i className="fab fa-youtube-square fa-2x"></i>
-                            </a>
-                        </div>
-                        <div className={"col-3"}></div>
-                    </div>
-                </div>
-            </footer>
-        )
-    }
-}
-
-ReactDOM.render(<App course="ReactJS"/>, document.getElementById('contentgoeshere'));
+ReactDOM.render(<Nav/>, document.getElementById('contentgoeshere'));
+ReactDOM.render(<App course="ReactJS"/>, document.getElementById('contentgoeshere2'));
 
